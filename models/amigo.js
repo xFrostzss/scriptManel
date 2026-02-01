@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
         {
             nome: { type: DataTypes.STRING, allowNull: false },
             email: { type: DataTypes.STRING, allowNull: false },
-            // DICA: Se fores usar o login, lembra-te de verificar se a senha está aqui!
+            // DICA: Se usar o login, lembre de verificar se a senha está aqui!
         },
         { tableName: "Amigo" },
     );
