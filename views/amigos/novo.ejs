@@ -1,20 +1,23 @@
-<!-- Arquivo: views/amigos/novo.ejs -->
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Novo Amigo</title>
-        <link rel="stylesheet" href="/css/styles.css" />
-    </head>
-    <body>
-        <h1>Novo Amigo</h1>
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Amigo</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Novo Amigo</h1>
+    <div class="form-card">
         <form action="/amigos/novo" method="POST">
-            <p><label>Nome:</label><br /><input name="nome" required /></p>
-            <p><label>Email:</label><br /><input name="email" required /></p>
-            <p>
-                <button type="submit">Salvar</button>
-                <a href="/amigos">Cancelar</a>
-            </p>
+            <label>Nome:</label>
+            <input name="nome" required />
+            
+            <label>Email:</label>
+            <input name="email" required />
+
+            <button type="submit" style="background-color: #7c4dff;">Salvar Amigo</button>
+            <a href="/amigos" style="margin-left: 15px;">Cancelar</a>
         </form>
-    </body>
+    </div>
+</body>
 </html>

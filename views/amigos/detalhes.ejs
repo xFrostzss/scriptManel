@@ -1,36 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <title>Detalhes do Amigo</title>
+    <meta charset="UTF-8">
+    <title>Perfil de <%= amigo.nome %></title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <h1>Perfil: <%= amigo.nome %></h1>
-    <p><strong>E-mail cadastrado:</strong> <%= amigo.email %></p>
+    <h1>Perfil do Amigo</h1>
 
-    <h1>Detalhes de <%= amigo.nome %></h1>
-<p>Email: <%= amigo.email %></p>
+    <div class="form-card" style="max-width: 600px; margin: 0;">
+        <h2 style="border: none; color: #ffffff;"><%= amigo.nome %></h2>
+        <p><strong>E-mail:</strong> <%= amigo.email %></p>
+        
+        <hr style="border: 0; border-top: 1px solid #7c4dff; margin: 20px 0;">
 
-<h3>Jogos que este amigo possui:</h3>
-<ul>
-    <% amigo.jogos.forEach(jogo => { %>
-        <li><%= jogo.titulo %> - <%= jogo.plataforma %></li>
-    <% }) %>
-</ul>
+        <h3 style="color: #bb86fc; margin-bottom: 15px;">Coleção de Jogos:</h3>
+        <% if (amigo.jogos && amigo.jogos.length > 0) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Plataforma</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% amigo.jogos.forEach(jogo => { %>
+                        <tr>
+                            <td><%= jogo.titulo %></td>
+                            <td><%= jogo.plataforma %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p style="color: #888;">Este amigo ainda não cadastrou jogos.</p>
+        <% } %>
 
-<a href="/amigos">Voltar</a>
-    <hr>
-    <h3>Jogos na Coleção:</h3>
-    <% if (amigo.jogos && amigo.jogos.length > 0) { %>
-        <ul>
-            <% amigo.jogos.forEach(jogo => { %>
-                <li><strong><%= jogo.titulo %></strong> - Plataforma: <%= jogo.plataforma %></li>
-            <% }) %>
-        </ul>
-    <% } else { %>
-        <p>Este amigo ainda não possui jogos cadastrados.</p>
-    <% } %>
-
-    <br>
-    <a href="/amigos">Voltar para a lista</a>
+        <br>
+        <a href="/amigos" style="color: #7c4dff;">← Voltar para a lista</a>
+    </div>
 </body>
 </html>

@@ -1,31 +1,45 @@
-<!-- Arquivo: views/amigos/index.ejs -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
-<title>Amigos</title>
-<link rel="stylesheet" href="/css/styles.css" />
+    <meta charset="UTF-8" />
+    <title>Amigos</title>
+    <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-<h1>Amigos</h1>
-<p><a href="/amigos/novo">Cadastrar novo amigo</a> | <a href="/jogos">Ver jogos</a></p>
-<table>
-<thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>Ações</th></tr></thead>
-<tbody>
-<% amigos.forEach(a => { %>
-<tr>
-<td><%= a.id %></td>
-<td><%= a.nome %></td>
-<td><%= a.email %></td>
-<td>
-<a href="/amigos/editar/<%= a.id %>">Editar</a>
-<form action="/amigos/excluir/<%= a.id %>" method="POST" style="display:inline;">
-<button type="submit">Excluir</button>
-</form>
-</td>
-</tr>
-<% }) %>
-</tbody>
-</table>
+    <h1>Amigos</h1>
+
+    <p>
+        <a href="/amigos/novo">Cadastrar novo amigo</a> | 
+        <a href="/jogos">Ver jogos</a> | 
+        <a href="/api/amigos" target="_blank" style="color: #d9534f; font-weight: bold;">Exportar JSON (API)</a>
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% amigos.forEach(a => { %>
+            <tr>
+                <td><%= a.id %></td>
+                <td><%= a.nome %></td>
+                <td><%= a.email %></td>
+                <td>
+                    <a href="/amigos/detalhes/<%= a.id %>" style="margin-right: 10px;">Ver Detalhes</a>
+                    <a href="/amigos/editar/<%= a.id %>" style="margin-right: 10px;">Editar</a>
+                    
+                    <form action="/amigos/excluir/<%= a.id %>" method="POST" style="display:inline;">
+                        <button type="submit">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
 </body>
 </html>

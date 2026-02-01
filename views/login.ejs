@@ -1,23 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <title>Login - Sistema de Empréstimos</title>
+    <meta charset="UTF-8">
+    <title>Login - IFPI</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <h2>Login do Sistema</h2>
-    <form action="/login" method="POST">
-        <div>
-            <label>E-mail:</label>
-            <input type="email" name="email" required>
+    <div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+        <div class="form-card">
+            <form action="/login" method="POST">
+                <h2 style="text-align: center; border: none;">Acesso ao Sistema</h2>
+                
+                <% if (erro) { %>
+                    <p style="color: #ff5252; text-align: center;"><%= erro %></p>
+                <% } %>
+
+                <label>E-mail:</label>
+                <input type="email" name="email" placeholder="seu@email.com" required>
+
+                <label>Senha:</label>
+                <input type="password" name="senha" placeholder="sua senha" required>
+
+                <button type="submit" style="background-color: #7c4dff; width: 100%; margin-top: 10px;">
+                    ENTRAR
+                </button>
+            </form>
         </div>
-        <div>
-            <label>Senha:</label>
-            <input type="password" name="senha" required>
-        </div>
-        <button type="submit">Entrar</button>
-    </form>
-    <% if (typeof erro !== 'undefined' && erro) { %>
-        <p style="color: red;"><%= erro %></p>
-    <% } %>
+    </div>
 </body>
 </html>

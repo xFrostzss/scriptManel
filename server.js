@@ -1,4 +1,5 @@
 // Arquivo: server.js (completo)
+const session = require("express-session");
 const express = require("express");
 const path = require("path");
 const { Amigo, Jogo, Emprestimo } = require("./models");
@@ -9,11 +10,41 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
-app.get("/", (req, res) => res.redirect("/amigos"));
+app.use(session({
+    secret: "segredo-do-ifpi",
+    resave: false,
+    saveUninitialized: true
+}));
+app.get("/", (req, res) => res.redirect("/login"));
 
 // LOGIN
 
 app.get("/login", (req, res) => res.render("login", { erro: null }));
+
+function verificarAutenticacao(req, res, next) {
+    if (req.session.usuarioLogado) {
+        return next(); // Se estiver logado, prossegue
+    }
+    res.redirect("/login"); // Se não, volta para o login
+}
+
+// rota de POST Login para salvar a sessão
+app.post("/login", async (req, res) => {
+    const { email, senha } = req.body;
+    const usuario = await Amigo.findOne({ where: { email } });
+
+    if (usuario && senha === "123") {
+        req.session.usuarioLogado = true; // Salva que o usuário entrou
+        return res.redirect("/amigos");
+    }
+    res.render("login", { erro: "E-mail ou senha incorretos!" });
+});
+
+// Proteja as rotas usando a função
+app.get("/amigos", verificarAutenticacao, async (req, res) => {
+    const amigos = await Amigo.findAll({ order: [["id", "ASC"]] });
+    res.render("amigos/index", { amigos });
+});
 
 app.post("/login", async (req, res) => {
     const { email, senha } = req.body;
@@ -41,6 +72,13 @@ app.get("/amigos/detalhes/:id", async (req, res) => {
         console.log(error); // Isso ajuda a ver o erro no terminal se algo falhar
         res.status(500).send("Erro ao carregar detalhes.");
     }
+});
+
+app.get("/jogos/detalhes/:id", verificarAutenticacao, async (req, res) => {
+    const jogo = await Jogo.findByPk(req.params.id, {
+        include: [{ model: Amigo, as: "dono" }, { model: Emprestimo, as: "emprestimos" }]
+    });
+    res.render("jogos/detalhes", { jogo });
 });
 
 // AMIGOS
@@ -104,6 +142,12 @@ app.get("/jogos", async (req, res) => {
         order: [["id", "ASC"]],
     });
     res.render("jogos/index", { jogos });
+});
+
+// API para Jogos
+app.get("/api/jogos", verificarAutenticacao, async (req, res) => {
+    const jogos = await Jogo.findAll({ include: [{ model: Amigo, as: "dono" }] });
+    res.json(jogos);
 });
 
 // REST jogos

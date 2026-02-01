@@ -1,26 +1,30 @@
-<!-- Arquivo: views/jogos/novo.ejs -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
-<title>Novo Jogo</title>
-<link rel="stylesheet" href="/css/styles.css" />
+    <meta charset="UTF-8">
+    <title>Novo Jogo</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<h1>Novo Jogo</h1>
-<form action="/jogos/novo" method="POST">
-<p><label>Título:</label><br /><input name="titulo" required /></p>
-<p><label>Plataforma:</label><br /><input name="plataforma" required placeholder="Ex.: PC,
-PS5, Switch" /></p>
-<p>
-<label>Dono (Amigo):</label><br />
-<select name="amigoId" required>
-<% amigos.forEach(a => { %>
-<option value="<%= a.id %>"><%= a.nome %> (<%= a.email %>)</option>
-<% }) %>
-</select>
-</p>
-<p><button type="submit">Salvar</button> <a href="/jogos">Cancelar</a></p>
-</form>
+    <h1>Cadastrar Jogo</h1>
+    <div class="form-card">
+        <form action="/jogos/novo" method="POST">
+            <label>Título:</label>
+            <input name="titulo" required />
+
+            <label>Plataforma:</label>
+            <input name="plataforma" required placeholder="Ex.: PC, PS5, Switch" />
+
+            <label>Dono (Amigo):</label>
+            <select name="amigoId" required>
+                <% amigos.forEach(a => { %>
+                    <option value="<%= a.id %>"><%= a.nome %></option>
+                <% }) %>
+            </select>
+
+            <button type="submit" style="background-color: #7c4dff;">Salvar Jogo</button>
+            <a href="/jogos" style="margin-left: 15px;">Cancelar</a>
+        </form>
+    </div>
 </body>
 </html>

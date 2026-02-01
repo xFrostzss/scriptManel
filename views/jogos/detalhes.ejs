@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes: <%= jogo.titulo %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Informações do Jogo</h1>
+
+    <div class="form-card" style="max-width: 600px; margin: 0;">
+        <h2 style="border: none; color: #ffffff;"><%= jogo.titulo %></h2>
+        <p><strong>Plataforma:</strong> <%= jogo.plataforma %></p>
+        <p><strong>Dono:</strong> <%= jogo.dono ? jogo.dono.nome : 'Sem dono' %></p>
+
+        <hr style="border: 0; border-top: 1px solid #7c4dff; margin: 20px 0;">
+
+        <h3 style="color: #bb86fc; margin-bottom: 15px;">Histórico de Empréstimos:</h3>
+        <% if (jogo.emprestimos && jogo.emprestimos.length > 0) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Amigo</th>
+                        <th>Início</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% jogo.emprestimos.forEach(emp => { %>
+                        <tr>
+                            <td>ID do Amigo: <%= emp.amigoId %></td>
+                            <td><%= emp.dataInicio %></td>
+                            <td><%= emp.dataFim ? 'Devolvido' : 'Em aberto' %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p style="color: #888;">Este jogo nunca foi emprestado.</p>
+        <% } %>
+
+        <br>
+        <a href="/jogos" style="color: #7c4dff;">← Voltar para a lista</a>
+    </div>
+</body>
+</html>

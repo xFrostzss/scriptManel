@@ -1,28 +1,43 @@
-<!-- Arquivo: views/jogos/editar.ejs -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
-<title>Editar Jogo</title>
-<link rel="stylesheet" href="/css/styles.css" />
+    <meta charset="UTF-8" />
+    <title>Editar Jogo - IFPI</title>
+    <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-<h1>Editar Jogo</h1>
-<form action="/jogos/editar/<%= jogo.id %>" method="POST">
-<p><label>Título:</label><br /><input name="titulo" value="<%= jogo.titulo %>" required /></p>
-<p><label>Plataforma:</label><br /><input name="plataforma" value="<%= jogo.plataforma %>" required
-/></p>
-<p>
-<label>Dono (Amigo):</label><br />
-<select name="amigoId" required>
-<% amigos.forEach(a => { %>
-<option value="<%= a.id %>" <%= Number(a.id) === Number(jogo.amigoId) ? 'selected' : '' %>>
-<%= a.nome %> (<%= a.email %>)
-</option>
-<% }) %>
-</select>
-</p>
-<p><button type="submit">Salvar</button> <a href="/jogos">Cancelar</a></p>
-</form>
+    <h1>Editar Jogo</h1>
+    
+    <div class="form-card">
+        <form action="/jogos/editar/<%= jogo.id %>" method="POST">
+            <div class="form-group">
+                <label>Título do Jogo:</label>
+                <input name="titulo" value="<%= jogo.titulo %>" required />
+            </div>
+
+            <div class="form-group">
+                <label>Plataforma:</label>
+                <input name="plataforma" value="<%= jogo.plataforma %>" required />
+            </div>
+
+            <div class="form-group">
+                <label>Dono (Amigo):</label>
+                <select name="amigoId" required>
+                    <% amigos.forEach(a => { %>
+                        <option value="<%= a.id %>" <%= Number(a.id) === Number(jogo.amigoId) ? 'selected' : '' %>>
+                            <%= a.nome %> (<%= a.email %>)
+                        </option>
+                    <% }) %>
+                </select>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <button type="submit" style="background-color: #7c4dff; padding: 10px 20px;">
+                    SALVAR ALTERAÇÕES
+                </button>
+                <a href="/jogos" style="margin-left: 15px; color: #ff5252;">Cancelar</a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

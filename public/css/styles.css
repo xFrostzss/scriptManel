@@ -1,27 +1,67 @@
-/* Arquivo: public/css/styles.css */
+/* public/css/styles.css */
 body {
+    background-color: #000000; /* Fundo Preto */
+    color: #ffffff; /* Texto Branco */
     font-family: Arial, sans-serif;
-    margin: 20px;
-    background: #f5f5f5;
+    padding: 20px;
 }
-h1,
-h2 {
-    color: #003366;
-}
+
+h1, h2 { color: #7c4dff; } /* Títulos em Roxo */
+
+/* Tabelas com linhas roxas */
 table {
     width: 100%;
     border-collapse: collapse;
-    background: #fff;
+    margin-top: 20px;
 }
-th,
-td {
-    border: 1px solid #ddd;
-    padding: 8px;
+
+th, td {
+    border: 1px solid #7c4dff; /* Linhas das Tabelas Roxas */
+    padding: 12px;
+    text-align: left;
 }
-a {
-    color: #003366;
-    text-decoration: none;
+
+th { background-color: #1a1a1a; }
+
+/* Links */
+a { color: #bb86fc; text-decoration: none; font-weight: bold; }
+a:hover { text-decoration: underline; }
+
+/* BOTÕES E FORMULÁRIOS */
+/* Remove o fundo branco global dos formulários (Isso mata o box do excluir) */
+form { 
+    background: transparent; 
+    padding: 0; 
+    margin: 0; 
+    display: inline; 
 }
+
+/* Botão de Excluir Vermelho */
 button {
+    background-color: #ff5252;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
     cursor: pointer;
+}
+
+/* Estilo para as caixas de Login e Cadastro (Para não ficarem soltas no preto) */
+.form-card {
+    background: #121212;
+    padding: 20px;
+    border: 1px solid #7c4dff;
+    border-radius: 8px;
+    max-width: 400px;
+    margin-top: 20px;
+    display: block; /* Aqui ele volta a ser bloco */
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    background: #222;
+    color: white;
+    border: 1px solid #7c4dff;
 }

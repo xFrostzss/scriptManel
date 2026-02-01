@@ -1,32 +1,23 @@
-<!-- Arquivo: views/amigos/editar.ejs -->
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Editar Amigo</title>
-        <link rel="stylesheet" href="/css/styles.css" />
-    </head>
-    <body>
-        <h1>Editar Amigo</h1>
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Amigo</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Editar Amigo</h1>
+    <div class="form-card">
         <form action="/amigos/editar/<%= amigo.id %>" method="POST">
-            <p>
-                <label>Nome:</label><br /><input
-                    name="nome"
-                    value="<%= amigo.nome %>"
-                    required
-                />
-            </p>
-            <p>
-                <label>Email:</label><br /><input
-                    name="email"
-                    value="<%= amigo.email %>"
-                    required
-                />
-            </p>
-            <p>
-                <button type="submit">Salvar</button>
-                <a href="/amigos">Cancelar</a>
-            </p>
+            <label>Nome:</label>
+            <input name="nome" value="<%= amigo.nome %>" required />
+            
+            <label>Email:</label>
+            <input name="email" value="<%= amigo.email %>" required />
+
+            <button type="submit" style="background-color: #7c4dff;">Salvar Alterações</button>
+            <a href="/amigos" style="margin-left: 15px;">Cancelar</a>
         </form>
-    </body>
+    </div>
+</body>
 </html>
