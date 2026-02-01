@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalhes do Amigo</title>
+</head>
+<body>
+    <h1>Perfil: <%= amigo.nome %></h1>
+    <p><strong>E-mail cadastrado:</strong> <%= amigo.email %></p>
+
+    <h1>Detalhes de <%= amigo.nome %></h1>
+<p>Email: <%= amigo.email %></p>
+
+<h3>Jogos que este amigo possui:</h3>
+<ul>
+    <% amigo.jogos.forEach(jogo => { %>
+        <li><%= jogo.titulo %> - <%= jogo.plataforma %></li>
+    <% }) %>
+</ul>
+
+<a href="/amigos">Voltar</a>
+    <hr>
+    <h3>Jogos na Coleção:</h3>
+    <% if (amigo.jogos && amigo.jogos.length > 0) { %>
+        <ul>
+            <% amigo.jogos.forEach(jogo => { %>
+                <li><strong><%= jogo.titulo %></strong> - Plataforma: <%= jogo.plataforma %></li>
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <p>Este amigo ainda não possui jogos cadastrados.</p>
+    <% } %>
+
+    <br>
+    <a href="/amigos">Voltar para a lista</a>
+</body>
+</html>

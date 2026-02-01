@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Sistema de Empréstimos</title>
+</head>
+<body>
+    <h2>Login do Sistema</h2>
+    <form action="/login" method="POST">
+        <div>
+            <label>E-mail:</label>
+            <input type="email" name="email" required>
+        </div>
+        <div>
+            <label>Senha:</label>
+            <input type="password" name="senha" required>
+        </div>
+        <button type="submit">Entrar</button>
+    </form>
+    <% if (typeof erro !== 'undefined' && erro) { %>
+        <p style="color: red;"><%= erro %></p>
+    <% } %>
+</body>
+</html>
