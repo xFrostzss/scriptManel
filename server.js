@@ -175,9 +175,17 @@ app.post("/jogos/novo", async (req, res) => {
         } 
     });
 
-    if (jogoExistente) {
-        return res.status(400).send("Erro: Este jogo já está cadastrado para esta plataforma.");
-    }
+if (jogoExistente) {
+    return res.status(400).send(`
+        <body style="background-color: #000; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif;">
+            <div style="background-color: #121212; border: 2px solid #7c4dff; padding: 30px; border-radius: 12px; box-shadow: 0 0 20px rgba(124, 77, 255, 0.3); max-width: 400px; text-align: center;">
+                <h2 style="color: #ff5252; margin-top: 0;">⚠️ Jogo Duplicado</h2>
+                <textarea readonly style="width: 100%; height: 80px; background: #222; color: #eee; border: 1px solid #444; border-radius: 5px; padding: 10px; resize: none; font-family: monospace; margin-bottom: 20px;">ERRO: O título "${titulo}" já consta no sistema para a plataforma "${plataforma}".</textarea>
+                <a href="/jogos/novo" style="background-color: #7c4dff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">VOLTAR</a>
+            </div>
+        </body>
+    `);
+}
 
     await Jogo.create({ titulo, plataforma, amigoId: Number(amigoId) });
     res.redirect("/jogos");
